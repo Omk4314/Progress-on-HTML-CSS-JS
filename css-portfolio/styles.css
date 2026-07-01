@@ -74,3 +74,23 @@ h2 {
     border-bottom: 2px solid #333;
     padding-bottom: 0.5rem;
 }
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+}
+
+.dark-mode a {
+    color: #4dabf7;
+}
+
+.dark-mode strong {
+    color: #a5d8ff;
+}
+
+.dark-mode h2 {
+    border-bottom-color: #555;
+}
+
+.dark-mode nav a:hover {
+    background-color: #333;
+}
