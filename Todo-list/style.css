@@ -1,0 +1,130 @@
+/* ============================================
+   To-Do List App - Stylesheet
+   ============================================ */
+
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Main page layout */
+body {
+    background-color: #1a1a2e;        /* Dark background */
+    color: #ff9f43;                   /* Orange font color */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Header section */
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #ff9f43;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Section spacing */
+section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: #16213e;        /* Slightly lighter dark panel */
+    border-radius: 12px;
+}
+
+/* Headings */
+h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+/* Form layout */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Labels */
+label {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* Text input field */
+input[type="text"] {
+    padding: 0.75rem;
+    border: 2px solid #ff9f43;
+    border-radius: 8px;
+    background-color: #0f3460;
+    color: #ff9f43;
+    font-size: 1rem;
+}
+
+input[type="text"]::placeholder {
+    color: #e67e22;
+    opacity: 0.7;
+}
+
+/* Buttons */
+button {
+    background-color: #00d4aa;        /* Teal color for buttons */
+    color: #1a1a2e;                   /* Dark text for contrast */
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 25px;              /* Round corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #00b894;        /* Slightly darker on hover */
+}
+
+/* Task list */
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background-color: #0f3460;
+    border-radius: 8px;
+}
+
+/* Checkbox styling */
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #00d4aa;
+}
+
+/* Completed tasks section */
+section[aria-labelledby="completed-heading"] p {
+    font-style: italic;
+    opacity: 0.7;
+}
+

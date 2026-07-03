@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>My To-Do List</title>
+</head>
+<body>
+
+    <header>
+        <h1>To-Do List</h1>
+        <p>Keep track of your daily tasks.</p>
+    </header>
+
+    <main>
+        <section aria-labelledby="add-task-heading">
+            <h2 id="add-task-heading">Add a New Task</h2>
+            <form action="#" method="post">
+                <label for="task-input">What do you need to do?</label>
+                <input 
+                    type="text" 
+                    id="task-input" 
+                    name="task" 
+                    placeholder="Enter your task here..." 
+                    required
+                    minlength="1"
+                    maxlength="200"
+                >
+                <button type="submit">Add Task</button>
+            </form>
+        </section>
+
+        <section aria-labelledby="tasks-heading">
+            <h2 id="tasks-heading">Your Tasks</h2>
+
+            <ul>
+                <li>
+                    <input type="checkbox" id="task-1" name="task-1">
+                    <label for="task-1">Welcome to your to-do list!</label>
+                    <button type="button" aria-label="Delete task: Welcome to your to-do list!">Delete</button>
+                </li>
+                <li>
+                    <input type="checkbox" id="task-2" name="task-2">
+                    <label for="task-2">Try adding your first task above</label>
+                    <button type="button" aria-label="Delete task: Try adding your first task above">Delete</button>
+                </li>
+                <li>
+                    <input type="checkbox" id="task-3" name="task-3" checked>
+                    <label for="task-3">Mark tasks as done using the checkbox</label>
+                    <button type="button" aria-label="Delete task: Mark tasks as done using the checkbox">Delete</button>
+                </li>
+            </ul>
+        </section>
+
+        <section aria-labelledby="completed-heading">
+            <h2 id="completed-heading">Completed Tasks</h2>
+            <p>No completed tasks yet.</p>
+        </section>
+    </main>
+    <script src="script.js"></script>
+
+</body>
+</html>
