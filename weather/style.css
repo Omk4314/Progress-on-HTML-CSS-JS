@@ -1,0 +1,630 @@
+/* ============================================
+   Weather Dashboard Styles
+   Inspired by clean, modern SaaS aesthetics
+   ============================================ */
+
+/* ── CSS Custom Properties (Colors & Tokens) ── */
+:root {
+    /* Core palette from reference */
+    --accent:        #3567FF;
+    --accent-hover:  #2952CC;
+    --accent-light:  #E8EFFF;
+
+    /* Neutrals */
+    --bg:            #F5F7FA;
+    --surface:       #FFFFFF;
+    --surface-2:     #F8F9FC;
+    --border:        #E2E8F0;
+    --border-light:  #EDF2F7;
+
+    /* Text */
+    --text:          #0F172A;
+    --text-secondary:#64748B;
+    --text-muted:    #94A3B8;
+
+    /* Semantic colors */
+    --success:       #10B981;
+    --success-bg:    #ECFDF5;
+    --warning:       #F59E0B;
+    --warning-bg:    #FFFBEB;
+    --danger:        #EF4444;
+    --danger-bg:     #FEF2F2;
+    --info:          #3B82F6;
+    --info-bg:       #EFF6FF;
+
+    /* Spacing scale */
+    --space-1: 0.25rem;   /* 4px  */
+    --space-2: 0.5rem;    /* 8px  */
+    --space-3: 0.75rem;   /* 12px */
+    --space-4: 1rem;      /* 16px */
+    --space-5: 1.25rem;   /* 20px */
+    --space-6: 1.5rem;    /* 24px */
+    --space-8: 2rem;      /* 32px */
+    --space-10: 2.5rem;   /* 40px */
+    --space-12: 3rem;     /* 48px */
+
+    /* Radii */
+    --radius-sm:  8px;
+    --radius-md:  12px;
+    --radius-lg:  16px;
+    --radius-xl:  24px;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.06);
+    --shadow-lg: 0 8px 24px rgba(15, 23, 42, 0.08);
+
+    /* Typography */
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, monospace;
+
+    /* Transitions */
+    --transition: 150ms ease;
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* ── Typography ── */
+h1, h2, h3 {
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+h1 { font-size: 1.875rem; }
+h2 { font-size: 1.5rem;  margin-bottom: var(--space-6); }
+h3 { font-size: 1.125rem; margin-bottom: var(--space-3); }
+
+p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-4);
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+/* ── Layout ── */
+body {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "header header"
+        "aside  main"
+        "footer footer";
+    min-height: 100vh;
+}
+
+/* ── Header ── */
+body > header {
+    grid-area: header;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: var(--space-4) var(--space-8);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+body > header h1 {
+    font-size: 1.25rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+body > header h1::before {
+    content: "🌤️";
+    font-size: 1.5rem;
+}
+
+/* Header nav */
+body > header nav ul {
+    display: flex;
+    list-style: none;
+    gap: var(--space-1);
+}
+
+body > header nav a {
+    display: block;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all var(--transition);
+}
+
+body > header nav a:hover {
+    background: var(--accent-light);
+    color: var(--accent);
+    text-decoration: none;
+}
+
+/* Search */
+body > header search form {
+    display: flex;
+    gap: var(--space-2);
+}
+
+body > header search label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+body > header search input {
+    width: 240px;
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    background: var(--surface-2);
+    font-size: 0.875rem;
+    color: var(--text);
+    outline: none;
+    transition: all var(--transition);
+}
+
+body > header search input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+body > header search input::placeholder {
+    color: var(--text-muted);
+}
+
+/* ── Aside (Quick Links) ── */
+body > aside {
+    grid-area: aside;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: var(--space-6);
+}
+
+body > aside h2 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-4);
+}
+
+body > aside nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+body > aside nav a {
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all var(--transition);
+}
+
+body > aside nav a:hover {
+    background: var(--accent-light);
+    color: var(--accent);
+}
+
+/* ── Main ── */
+main {
+    grid-area: main;
+    padding: var(--space-8);
+    overflow-y: auto;
+}
+
+/* ── Sections ── */
+main > section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    margin-bottom: var(--space-6);
+    box-shadow: var(--shadow-sm);
+}
+
+main > section > h2 {
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border-light);
+}
+
+/* ── Articles (Cards) ── */
+main article {
+    background: var(--surface-2);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+    margin-bottom: var(--space-5);
+    transition: box-shadow var(--transition), transform var(--transition);
+}
+
+main article:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+main article header {
+    margin-bottom: var(--space-4);
+}
+
+main article header h3 {
+    font-size: 1.125rem;
+    color: var(--text);
+    margin-bottom: var(--space-1);
+}
+
+main article header time {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+}
+
+main article footer {
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border-light);
+}
+
+/* ── Definition Lists (Weather Data) ── */
+main article figure {
+    margin: 0;
+}
+
+main article figcaption {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-3);
+    font-weight: 600;
+}
+
+dl {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--space-3) var(--space-5);
+}
+
+dt {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: var(--space-1);
+}
+
+dd {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    font-family: var(--font-mono);
+}
+
+/* Temperature highlight */
+dd:has(+ dt),
+dt:has(+ dd) {
+    /* sibling styling handled by grid */
+}
+
+/* ── Tables ── */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    margin-top: var(--space-4);
+}
+
+caption {
+    text-align: left;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-3);
+    caption-side: top;
+}
+
+th, td {
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    border-bottom: 1px solid var(--border-light);
+}
+
+th {
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: var(--surface-2);
+}
+
+tbody tr:hover {
+    background: var(--accent-light);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ── Forms ── */
+form {
+    max-width: 480px;
+}
+
+fieldset {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+    margin-bottom: var(--space-4);
+}
+
+legend {
+    padding: 0 var(--space-2);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: var(--space-2);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+select {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    font-size: 0.875rem;
+    color: var(--text);
+    outline: none;
+    transition: all var(--transition);
+    margin-bottom: var(--space-4);
+}
+
+input:focus,
+select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+input::placeholder {
+    color: var(--text-muted);
+}
+
+/* ── Buttons ── */
+button,
+input[type="submit"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-5);
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+    white-space: nowrap;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+button:active,
+input[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* Secondary button style */
+button[type="submit"]:nth-of-type(2),
+form[action*="favorites"] button {
+    background: var(--surface);
+    color: var(--accent);
+    border: 1px solid var(--border);
+}
+
+form[action*="favorites"] button:hover {
+    background: var(--accent-light);
+    border-color: var(--accent);
+}
+
+/* Danger / Remove buttons */
+form[action*="favorites/"] button,
+form:has(input[value="delete"]) button {
+    background: var(--danger-bg);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+form[action*="favorites/"] button:hover,
+form:has(input[value="delete"]) button:hover {
+    background: var(--danger);
+    color: white;
+}
+
+/* ── Alerts Section ── */
+#alerts article {
+    border-left: 4px solid var(--danger);
+}
+
+#alerts article:nth-of-type(2) {
+    border-left-color: var(--warning);
+}
+
+#alerts article header h3 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+#alerts article p strong {
+    color: var(--text);
+}
+
+/* ── Dashboard Stats ── */
+#dashboard dl {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--space-4);
+}
+
+#dashboard dd {
+    font-size: 1.5rem;
+    color: var(--accent);
+}
+
+/* ── Login / Register ── */
+#login,
+#register {
+    max-width: 420px;
+    margin: var(--space-12) auto;
+}
+
+#login h2,
+#register h2 {
+    text-align: center;
+    margin-bottom: var(--space-6);
+}
+
+#login p:last-child,
+#register p:last-child {
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+/* ── Footer ── */
+body > footer {
+    grid-area: footer;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: var(--space-6) var(--space-8);
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+body > footer p {
+    margin-bottom: var(--space-2);
+    color: var(--text-muted);
+}
+
+body > footer a {
+    color: var(--text-secondary);
+    margin: 0 var(--space-2);
+}
+
+body > footer a:hover {
+    color: var(--accent);
+}
+
+/* ── Utility: Hide login/register when viewing dashboard ── */
+/* In a real app, these would be toggled via JS. For now, 
+   we just ensure the layout works when all are present. */
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "main"
+            "aside"
+            "footer";
+    }
+
+    body > aside {
+        border-right: none;
+        border-top: 1px solid var(--border);
+    }
+
+    body > header {
+        flex-wrap: wrap;
+        gap: var(--space-3);
+    }
+
+    body > header search input {
+        width: 100%;
+    }
+
+    dl {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: var(--space-4);
+    }
+
+    main > section {
+        padding: var(--space-5);
+    }
+
+    body > header nav ul {
+        flex-wrap: wrap;
+    }
+
+    table {
+        font-size: 0.75rem;
+    }
+
+    th, td {
+        padding: var(--space-2);
+    }
+}

@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Weather Dashboard</title>
+<base target="_blank">
+</head>
+<body>
+
+    <header>
+        <h1>Weather Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#locations">Locations</a></li>
+                <li><a href="#favorites">Favorites</a></li>
+                <li><a href="#alerts">Alerts</a></li>
+                <li><a href="#settings">Settings</a></li>
+            </ul>
+        </nav>
+        <search>
+            <form action="/search" method="get">
+                <label for="city-search">Search city</label>
+                <input type="search" id="city-search" name="q" placeholder="Search for a city...">
+                <button type="submit">Search</button>
+            </form>
+        </search>
+    </header>
+
+    <main>
+
+        <section id="login" aria-label="User Authentication">
+            <h2>Login</h2>
+            <form action="/auth/login" method="post">
+                <fieldset>
+                    <legend>Account Credentials</legend>
+                    <p>
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required autocomplete="username">
+                    </p>
+                    <p>
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required autocomplete="current-password">
+                    </p>
+                    <button type="submit">Sign In</button>
+                </fieldset>
+            </form>
+            <p>Don't have an account? <a href="#register">Register here</a></p>
+        </section>
+
+        <section id="register" aria-label="User Registration">
+            <h2>Create Account</h2>
+            <form action="/auth/register" method="post">
+                <fieldset>
+                    <legend>New Account Details</legend>
+                    <p>
+                        <label for="reg-username">Username</label>
+                        <input type="text" id="reg-username" name="username" required minlength="3" maxlength="50">
+                    </p>
+                    <p>
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" name="email" required>
+                    </p>
+                    <p>
+                        <label for="reg-fullname">Full Name</label>
+                        <input type="text" id="reg-fullname" name="full_name">
+                    </p>
+                    <p>
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" name="password" required minlength="6">
+                    </p>
+                    <button type="submit">Register</button>
+                </fieldset>
+            </form>
+        </section>
+
+        <section id="dashboard" aria-label="Weather Dashboard Overview">
+            <h2>Dashboard Overview</h2>
+
+            <article aria-label="Dashboard Statistics">
+                <h3>At a Glance</h3>
+                <dl>
+                    <dt>Total Locations</dt>
+                    <dd>5</dd>
+                    <dt>Weather Records</dt>
+                    <dd>1,247</dd>
+                    <dt>Forecast Records</dt>
+                    <dd>350</dd>
+                    <dt>Average Temperature</dt>
+                    <dd>22.4°C</dd>
+                    <dt>Your Favorites</dt>
+                    <dd>3</dd>
+                </dl>
+            </article>
+
+            <article aria-label="Weather Alerts">
+                <h3>Active Alerts</h3>
+                <ul>
+                    <li>
+                        <strong>Extreme Heat</strong> — Dubai, UAE: 42.0°C
+                        <time datetime="2026-07-11T10:00:00Z">Today at 10:00 AM</time>
+                    </li>
+                    <li>
+                        <strong>Extreme Wind</strong> — Sydney, Australia: 120 km/h
+                        <time datetime="2026-07-11T08:30:00Z">Today at 8:30 AM</time>
+                    </li>
+                </ul>
+            </article>
+        </section>
+
+        <section id="current-weather" aria-label="Current Weather Conditions">
+            <h2>Current Weather</h2>
+
+            <article aria-label="Current weather for Tokyo">
+                <header>
+                    <h3>Tokyo, Japan</h3>
+                    <p><time datetime="2026-07-11T14:00:00+09:00">July 11, 2:00 PM JST</time></p>
+                </header>
+                <figure>
+                    <figcaption>Current Conditions</figcaption>
+                    <dl>
+                        <dt>Temperature</dt>
+                        <dd>28.0°C</dd>
+                        <dt>Feels Like</dt>
+                        <dd>31.5°C</dd>
+                        <dt>Condition</dt>
+                        <dd>Sunny</dd>
+                        <dt>Description</dt>
+                        <dd>Hot and humid</dd>
+                        <dt>Humidity</dt>
+                        <dd>80%</dd>
+                        <dt>Pressure</dt>
+                        <dd>1005 hPa</dd>
+                        <dt>Wind Speed</dt>
+                        <dd>10 km/h</dd>
+                        <dt>Wind Direction</dt>
+                        <dd>SE</dd>
+                        <dt>Visibility</dt>
+                        <dd>10 km</dd>
+                        <dt>UV Index</dt>
+                        <dd>8</dd>
+                        <dt>Precipitation</dt>
+                        <dd>0.0 mm</dd>
+                    </dl>
+                </figure>
+                <footer>
+                    <form action="/favorites" method="post">
+                        <input type="hidden" name="location_id" value="3">
+                        <button type="submit">Add to Favorites</button>
+                    </form>
+                </footer>
+            </article>
+
+            <article aria-label="Current weather for New York">
+                <header>
+                    <h3>New York, USA</h3>
+                    <p><time datetime="2026-07-11T01:00:00-04:00">July 11, 1:00 AM EDT</time></p>
+                </header>
+                <figure>
+                    <figcaption>Current Conditions</figcaption>
+                    <dl>
+                        <dt>Temperature</dt>
+                        <dd>22.5°C</dd>
+                        <dt>Feels Like</dt>
+                        <dd>21.0°C</dd>
+                        <dt>Condition</dt>
+                        <dd>Partly Cloudy</dd>
+                        <dt>Description</dt>
+                        <dd>Nice weather with some clouds</dd>
+                        <dt>Humidity</dt>
+                        <dd>65%</dd>
+                        <dt>Pressure</dt>
+                        <dd>1013 hPa</dd>
+                        <dt>Wind Speed</dt>
+                        <dd>15 km/h</dd>
+                        <dt>Wind Direction</dt>
+                        <dd>SW</dd>
+                        <dt>Visibility</dt>
+                        <dd>10 km</dd>
+                        <dt>UV Index</dt>
+                        <dd>5</dd>
+                        <dt>Precipitation</dt>
+                        <dd>0.0 mm</dd>
+                    </dl>
+                </figure>
+                <footer>
+                    <form action="/favorites" method="post">
+                        <input type="hidden" name="location_id" value="1">
+                        <button type="submit">Add to Favorites</button>
+                    </form>
+                </footer>
+            </article>
+
+            <article aria-label="Current weather for London">
+                <header>
+                    <h3>London, UK</h3>
+                    <p><time datetime="2026-07-11T06:00:00+01:00">July 11, 6:00 AM BST</time></p>
+                </header>
+                <figure>
+                    <figcaption>Current Conditions</figcaption>
+                    <dl>
+                        <dt>Temperature</dt>
+                        <dd>15.2°C</dd>
+                        <dt>Feels Like</dt>
+                        <dd>13.8°C</dd>
+                        <dt>Condition</dt>
+                        <dd>Rainy</dd>
+                        <dt>Description</dt>
+                        <dd>Light rain throughout the day</dd>
+                        <dt>Humidity</dt>
+                        <dd>78%</dd>
+                        <dt>Pressure</dt>
+                        <dd>1008 hPa</dd>
+                        <dt>Wind Speed</dt>
+                        <dd>22 km/h</dd>
+                        <dt>Wind Direction</dt>
+                        <dd>W</dd>
+                        <dt>Visibility</dt>
+                        <dd>8 km</dd>
+                        <dt>UV Index</dt>
+                        <dd>3</dd>
+                        <dt>Precipitation</dt>
+                        <dd>5.2 mm</dd>
+                    </dl>
+                </figure>
+                <footer>
+                    <form action="/favorites" method="post">
+                        <input type="hidden" name="location_id" value="2">
+                        <button type="submit">Add to Favorites</button>
+                    </form>
+                </footer>
+            </article>
+        </section>
+
+        <section id="forecast" aria-label="Weather Forecast">
+            <h2>7-Day Forecast</h2>
+
+            <article aria-label="Forecast for Tokyo">
+                <h3>Tokyo, Japan — Forecast</h3>
+                <table>
+                    <caption>Upcoming weather conditions for Tokyo</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Condition</th>
+                            <th scope="col">High</th>
+                            <th scope="col">Low</th>
+                            <th scope="col">Humidity</th>
+                            <th scope="col">Wind</th>
+                            <th scope="col">Precipitation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><time datetime="2026-07-12">July 12</time></td>
+                            <td>Sunny</td>
+                            <td>30°C</td>
+                            <td>24°C</td>
+                            <td>62%</td>
+                            <td>11 km/h N</td>
+                            <td>0.5 mm</td>
+                        </tr>
+                        <tr>
+                            <td><time datetime="2026-07-13">July 13</time></td>
+                            <td>Cloudy</td>
+                            <td>31°C</td>
+                            <td>25°C</td>
+                            <td>64%</td>
+                            <td>12 km/h NE</td>
+                            <td>1.0 mm</td>
+                        </tr>
+                        <tr>
+                            <td><time datetime="2026-07-14">July 14</time></td>
+                            <td>Partly Cloudy</td>
+                            <td>32°C</td>
+                            <td>26°C</td>
+                            <td>66%</td>
+                            <td>13 km/h E</td>
+                            <td>1.5 mm</td>
+                        </tr>
+                        <tr>
+                            <td><time datetime="2026-07-15">July 15</time></td>
+                            <td>Rainy</td>
+                            <td>33°C</td>
+                            <td>27°C</td>
+                            <td>68%</td>
+                            <td>14 km/h SE</td>
+                            <td>2.0 mm</td>
+                        </tr>
+                        <tr>
+                            <td><time datetime="2026-07-16">July 16</time></td>
+                            <td>Clear</td>
+                            <td>34°C</td>
+                            <td>28°C</td>
+                            <td>70%</td>
+                            <td>15 km/h S</td>
+                            <td>2.5 mm</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+
+        <section id="locations" aria-label="All Locations">
+            <h2>All Locations</h2>
+            <table>
+                <caption>List of tracked weather locations</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">City</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Latitude</th>
+                        <th scope="col">Longitude</th>
+                        <th scope="col">Timezone</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>New York</td>
+                        <td>USA</td>
+                        <td>40.7128</td>
+                        <td>-74.0060</td>
+                        <td>EST</td>
+                        <td>
+                            <a href="/weather/summary/1">View Weather</a>
+                            <form action="/favorites" method="post">
+                                <input type="hidden" name="location_id" value="1">
+                                <button type="submit">Favorite</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>London</td>
+                        <td>UK</td>
+                        <td>51.5074</td>
+                        <td>-0.1278</td>
+                        <td>GMT</td>
+                        <td>
+                            <a href="/weather/summary/2">View Weather</a>
+                            <form action="/favorites" method="post">
+                                <input type="hidden" name="location_id" value="2">
+                                <button type="submit">Favorite</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tokyo</td>
+                        <td>Japan</td>
+                        <td>35.6762</td>
+                        <td>139.6503</td>
+                        <td>JST</td>
+                        <td>
+                            <a href="/weather/summary/3">View Weather</a>
+                            <form action="/favorites" method="post">
+                                <input type="hidden" name="location_id" value="3">
+                                <button type="submit">Favorite</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sydney</td>
+                        <td>Australia</td>
+                        <td>-33.8688</td>
+                        <td>151.2093</td>
+                        <td>AEST</td>
+                        <td>
+                            <a href="/weather/summary/4">View Weather</a>
+                            <form action="/favorites" method="post">
+                                <input type="hidden" name="location_id" value="4">
+                                <button type="submit">Favorite</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Dubai</td>
+                        <td>UAE</td>
+                        <td>25.2048</td>
+                        <td>55.2708</td>
+                        <td>GST</td>
+                        <td>
+                            <a href="/weather/summary/5">View Weather</a>
+                            <form action="/favorites" method="post">
+                                <input type="hidden" name="location_id" value="5">
+                                <button type="submit">Favorite</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="favorites" aria-label="Favorite Locations">
+            <h2>Your Favorite Locations</h2>
+
+            <article aria-label="Favorite location New York">
+                <h3>New York, USA</h3>
+                <p>Current: 22.5°C, Partly Cloudy</p>
+                <p>Last updated <time datetime="2026-07-11T01:00:00-04:00">July 11, 1:00 AM EDT</time></p>
+                <a href="/weather/summary/1">View Details</a>
+                <form action="/favorites/1" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <button type="submit">Remove from Favorites</button>
+                </form>
+            </article>
+
+            <article aria-label="Favorite location Tokyo">
+                <h3>Tokyo, Japan</h3>
+                <p>Current: 28.0°C, Sunny</p>
+                <p>Last updated <time datetime="2026-07-11T14:00:00+09:00">July 11, 2:00 PM JST</time></p>
+                <a href="/weather/summary/3">View Details</a>
+                <form action="/favorites/3" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <button type="submit">Remove from Favorites</button>
+                </form>
+            </article>
+
+            <article aria-label="Favorite location Sydney">
+                <h3>Sydney, Australia</h3>
+                <p>Current: 18.3°C, Clear</p>
+                <p>Last updated <time datetime="2026-07-11T16:00:00+10:00">July 11, 4:00 PM AEST</time></p>
+                <a href="/weather/summary/4">View Details</a>
+                <form action="/favorites/4" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <button type="submit">Remove from Favorites</button>
+                </form>
+            </article>
+        </section>
+
+        <section id="weather-details" aria-label="Detailed Weather Data">
+            <h2>Weather Data Records</h2>
+
+            <form action="/weather" method="get">
+                <fieldset>
+                    <legend>Filter Records</legend>
+                    <p>
+                        <label for="filter-location">Location</label>
+                        <select id="filter-location" name="location_id">
+                            <option value="">All Locations</option>
+                            <option value="1">New York</option>
+                            <option value="2">London</option>
+                            <option value="3">Tokyo</option>
+                            <option value="4">Sydney</option>
+                            <option value="5">Dubai</option>
+                        </select>
+                    </p>
+                    <p>
+                        <label for="filter-condition">Condition</label>
+                        <input type="text" id="filter-condition" name="condition" placeholder="e.g. Sunny, Rainy">
+                    </p>
+                    <p>
+                        <label for="filter-forecast">Type</label>
+                        <select id="filter-forecast" name="is_forecast">
+                            <option value="">All</option>
+                            <option value="false">Current</option>
+                            <option value="true">Forecast</option>
+                        </select>
+                    </p>
+                    <button type="submit">Apply Filters</button>
+                </fieldset>
+            </form>
+
+            <table>
+                <caption>Weather data entries</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Recorded</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Temp</th>
+                        <th scope="col">Condition</th>
+                        <th scope="col">Humidity</th>
+                        <th scope="col">Pressure</th>
+                        <th scope="col">Wind</th>
+                        <th scope="col">Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><time datetime="2026-07-11T14:00:00Z">Jul 11, 14:00</time></td>
+                        <td>Tokyo, Japan</td>
+                        <td>28.0°C</td>
+                        <td>Sunny</td>
+                        <td>80%</td>
+                        <td>1005 hPa</td>
+                        <td>10 km/h SE</td>
+                        <td>Current</td>
+                    </tr>
+                    <tr>
+                        <td><time datetime="2026-07-11T01:00:00Z">Jul 11, 01:00</time></td>
+                        <td>New York, USA</td>
+                        <td>22.5°C</td>
+                        <td>Partly Cloudy</td>
+                        <td>65%</td>
+                        <td>1013 hPa</td>
+                        <td>15 km/h SW</td>
+                        <td>Current</td>
+                    </tr>
+                    <tr>
+                        <td><time datetime="2026-07-11T06:00:00Z">Jul 11, 06:00</time></td>
+                        <td>London, UK</td>
+                        <td>15.2°C</td>
+                        <td>Rainy</td>
+                        <td>78%</td>
+                        <td>1008 hPa</td>
+                        <td>22 km/h W</td>
+                        <td>Current</td>
+                    </tr>
+                    <tr>
+                        <td><time datetime="2026-07-12T00:00:00Z">Jul 12, 00:00</time></td>
+                        <td>Tokyo, Japan</td>
+                        <td>30.0°C</td>
+                        <td>Sunny</td>
+                        <td>62%</td>
+                        <td>1011 hPa</td>
+                        <td>11 km/h N</td>
+                        <td>Forecast</td>
+                    </tr>
+                    <tr>
+                        <td><time datetime="2026-07-13T00:00:00Z">Jul 13, 00:00</time></td>
+                        <td>Tokyo, Japan</td>
+                        <td>31.0°C</td>
+                        <td>Cloudy</td>
+                        <td>64%</td>
+                        <td>1012 hPa</td>
+                        <td>12 km/h NE</td>
+                        <td>Forecast</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="alerts" aria-label="Weather Alerts">
+            <h2>Weather Alerts</h2>
+
+            <article aria-label="Extreme heat alert">
+                <header>
+                    <h3>🔥 Extreme Heat Warning</h3>
+                    <p>Severity: <strong>High</strong></p>
+                </header>
+                <p><strong>Location:</strong> Dubai, UAE</p>
+                <p><strong>Message:</strong> Extreme heat: 42.0°C</p>
+                <p><strong>Recorded:</strong> <time datetime="2026-07-11T10:00:00Z">July 11, 10:00 AM UTC</time></p>
+            </article>
+
+            <article aria-label="Extreme wind alert">
+                <header>
+                    <h3>💨 Extreme Wind Warning</h3>
+                    <p>Severity: <strong>High</strong></p>
+                </header>
+                <p><strong>Location:</strong> Sydney, Australia</p>
+                <p><strong>Message:</strong> Extreme wind: 120 km/h</p>
+                <p><strong>Recorded:</strong> <time datetime="2026-07-11T08:30:00Z">July 11, 8:30 AM UTC</time></p>
+            </article>
+        </section>
+
+        <section id="settings" aria-label="User Settings">
+            <h2>Account Settings</h2>
+
+            <article aria-label="Profile information">
+                <h3>Profile</h3>
+                <dl>
+                    <dt>Username</dt>
+                    <dd>john</dd>
+                    <dt>Email</dt>
+                    <dd>john@example.com</dd>
+                    <dt>Full Name</dt>
+                    <dd>John Doe</dd>
+                    <dt>Account Status</dt>
+                    <dd>Active</dd>
+                    <dt>Member Since</dt>
+                    <dd><time datetime="2026-01-15">January 15, 2026</time></dd>
+                </dl>
+            </article>
+
+            <article aria-label="Update profile form">
+                <h3>Update Profile</h3>
+                <form action="/auth/me" method="post">
+                    <fieldset>
+                        <legend>Profile Details</legend>
+                        <p>
+                            <label for="set-email">Email</label>
+                            <input type="email" id="set-email" name="email" value="john@example.com">
+                        </p>
+                        <p>
+                            <label for="set-fullname">Full Name</label>
+                            <input type="text" id="set-fullname" name="full_name" value="John Doe">
+                        </p>
+                        <button type="submit">Save Changes</button>
+                    </fieldset>
+                </form>
+            </article>
+
+            <article aria-label="Change password form">
+                <h3>Change Password</h3>
+                <form action="/auth/password" method="post">
+                    <fieldset>
+                        <legend>Security</legend>
+                        <p>
+                            <label for="old-password">Current Password</label>
+                            <input type="password" id="old-password" name="old_password" required>
+                        </p>
+                        <p>
+                            <label for="new-password">New Password</label>
+                            <input type="password" id="new-password" name="new_password" required minlength="6">
+                        </p>
+                        <p>
+                            <label for="confirm-password">Confirm New Password</label>
+                            <input type="password" id="confirm-password" name="confirm_password" required>
+                        </p>
+                        <button type="submit">Update Password</button>
+                    </fieldset>
+                </form>
+            </article>
+        </section>
+
+    </main>
+
+    <aside aria-label="Quick Navigation">
+        <h2>Quick Links</h2>
+        <nav>
+            <ul>
+                <li><a href="#dashboard">Dashboard Overview</a></li>
+                <li><a href="#current-weather">Current Weather</a></li>
+                <li><a href="#forecast">7-Day Forecast</a></li>
+                <li><a href="#locations">Browse Locations</a></li>
+                <li><a href="#favorites">My Favorites</a></li>
+                <li><a href="#alerts">Weather Alerts</a></li>
+                <li><a href="#settings">Account Settings</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <footer>
+        <p>Weather Dashboard API v1.0.0</p>
+        <p>Last updated: <time datetime="2026-07-11T14:59:00Z">July 11, 2026</time></p>
+        <p><a href="/docs">API Documentation</a> | <a href="/health">Health Check</a></p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
